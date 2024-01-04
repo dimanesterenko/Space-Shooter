@@ -11,16 +11,24 @@ background = pygame.image.load("images/bg.png")
 player_image = pygame.image.load("images/arcade.png")
 spaceshipX=370
 spaceshipY=480
+changeX=0
 
-def player():
-    screen.blit(player_image, (spaceshipX, spaceshipY))
 
 running = True
 while running:
     screen.blit(background, (0, 0))
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-    spaceshipX+=1
-    player()
+
+        if event.type==pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT:
+                changeX = -1
+            if event.key == pygame.K_RIGHT:
+                changeX = 1
+
+    spaceshipX+=changeX
+
+    screen.blit(player_image, (spaceshipX, spaceshipY))
     pygame.display.update()
