@@ -20,8 +20,8 @@ enemyspeedX=3
 enemyspeedY=10
 
 check=False
-bulletX=370
-bulletY=480
+bulletX=386
+bulletY=490
 
 running = True
 while running:
@@ -47,6 +47,7 @@ while running:
     elif spaceshipX>=738:
         spaceshipX=738
 
+    enemyX+=enemyspeedX
 
     if enemyX<=0:
         enemyspeedX=3
@@ -54,9 +55,14 @@ while running:
     if enemyX>=738:
         enemyspeedX=-3
         enemyY+=enemyspeedY
-    enemyX+=enemyspeedX
-    if check is True:
+
+    if bulletY<=0:
+        bulletY=490
+        check=False
+
+    if check:
         screen.blit(bullet_image, (bulletX, bulletY))
+        bulletY-=5
 
     screen.blit(player_image, (spaceshipX, spaceshipY))
     screen.blit(enemy_image, (enemyX, enemyY))
