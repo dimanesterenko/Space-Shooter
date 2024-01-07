@@ -37,7 +37,9 @@ while running:
             if event.key == pygame.K_RIGHT:
                 changeX = 5
             if event.key == pygame.K_SPACE:
-                check=True
+                if check is False:
+                    check = True
+                    bulletX = spaceshipX + 16
 
         if event.type == pygame.KEYUP:
             changeX=0
