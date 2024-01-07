@@ -1,5 +1,6 @@
 import pygame
 import random
+import math
 pygame.init()
 
 screen = pygame.display.set_mode((800, 600))
@@ -19,9 +20,17 @@ enemyY=random.randint(30,150)
 enemyspeedX=3
 enemyspeedY=10
 
-check=False
-bulletX=386
-bulletY=490
+check = False
+bulletX = 386
+bulletY = 490
+
+score = 0
+
+def collision():
+    distance = math.sqrt(math.pow(bulletX-enemyX,2)+math.pow(bulletY-enemyY,2))
+    if distance<27:
+        return True
+
 
 running = True
 while running:
@@ -40,7 +49,6 @@ while running:
                 if check is False:
                     check = True
                     bulletX = spaceshipX + 16
-
         if event.type == pygame.KEYUP:
             changeX=0
     spaceshipX+=changeX
@@ -64,8 +72,14 @@ while running:
 
     if check:
         screen.blit(bullet_image, (bulletX, bulletY))
-        bulletY-=5
-
+        bulletY-=10
+    collision_occured = collision()
+    if collision_occured:
+        bulletY=480
+        check=False
+        score+=1
+        enemyX=random.randint(0,736)
+        enemyY=random.randint(30,150)
     screen.blit(player_image, (spaceshipX, spaceshipY))
     screen.blit(enemy_image, (enemyX, enemyY))
 
