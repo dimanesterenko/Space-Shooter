@@ -18,13 +18,20 @@ changeX=0
 enemyX=random.randint(0,738)
 enemyY=random.randint(30,150)
 enemyspeedX=3
-enemyspeedY=10
+enemyspeedY=40
 
 check = False
 bulletX = 386
 bulletY = 490
 
 score = 0
+
+font = pygame.font.SysFont('Monospace',32,'bold')
+
+
+def score_text():
+    img = font.render(f"Score:{score}",True,"orange")
+    screen.blit(img,(10,10))
 
 def collision():
     distance = math.sqrt(math.pow(bulletX-enemyX,2)+math.pow(bulletY-enemyY,2))
@@ -82,5 +89,5 @@ while running:
         enemyY=random.randint(30,150)
     screen.blit(player_image, (spaceshipX, spaceshipY))
     screen.blit(enemy_image, (enemyX, enemyY))
-
+    score_text()
     pygame.display.update()
