@@ -33,6 +33,13 @@ def score_text():
     img = font.render(f"Score:{score}",True,"orange")
     screen.blit(img,(10,10))
 
+font_gameover = pygame.font.SysFont('Monospace',64,'bold')
+
+def gameover():
+    img_go = font.render("GAME OVER", True, "white")
+    screen.blit(img_go, (350, 250))
+
+
 def collision():
     distance = math.sqrt(math.pow(bulletX-enemyX,2)+math.pow(bulletY-enemyY,2))
     if distance<27:
@@ -80,6 +87,12 @@ while running:
     if check:
         screen.blit(bullet_image, (bulletX, bulletY))
         bulletY-=10
+
+    if enemyY>420:
+        enemyY=2000
+        gameover()
+
+
     collision_occured = collision()
     if collision_occured:
         bulletY=480
